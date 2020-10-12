@@ -259,7 +259,6 @@ export const resolvers = {
         .join("campaign", "assignment.campaign_id", "campaign.id")
         .where({
           is_started: true,
-          organization_id: organizationId,
           is_archived: false
         })
         .where("assignment.user_id", user.id);
