@@ -102,10 +102,15 @@ class TexterTodoList extends React.Component {
     }
     this.termsAgreed();
     this.profileComplete();
+    const allOrgsMode = this.props.location.query["org"] == "all";
+
     // Default todo screen should only show todos for whatever org the texter is currently viewing
-    const todos = data.user.todos.filter(
-      todo => todo.campaign.organization.id == this.props.params.organizationId
-    );
+    const todos = !allOrgsMode
+      ? data.user.todos.filter(
+          todo =>
+            todo.campaign.organization.id == this.props.params.organizationId
+        )
+      : data.user.todos;
     const renderedTodos = this.renderTodoList(todos);
 
     const empty = <Empty title="You have nothing to do!" icon={<Check />} />;
